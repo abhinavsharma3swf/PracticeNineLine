@@ -1,8 +1,7 @@
-package service;
+package com.example.demo.service;
 
 import com.example.demo.entity.NineLine;
 import com.example.demo.repository.NineLineRepo;
-import com.example.demo.service.NineLineService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,6 +1,5 @@
-package controller;
+package com.example.demo.controller;
 
-import com.example.demo.controller.NineLineController;
 import com.example.demo.entity.NineLine;
 import com.example.demo.service.NineLineService;
 import com.fasterxml.jackson.databind.ObjectMapper;
