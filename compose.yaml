@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  postgres-db:
+    container_name: nineLine
+    image: postgres # use latest official postgres version
+    restart: always
+    environment:
+      POSTGRES_USER: nineline_dev
+      POSTGRES_PASSWORD: nineline_dev
+      POSTGRES_DB: nineline
+      POSTGRES_HOST_AUTH_METHOD: password
+    ports:
+      - "5436:5432"
+
+volumes:
+  postgresql_data:
+    driver: local
