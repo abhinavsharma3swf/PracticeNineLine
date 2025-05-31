@@ -1,9 +1,14 @@
 import {render, screen} from "@testing-library/react";
-import {describe, expect, it, vi} from "vitest";
+import {beforeEach, describe, expect, it, vi} from "vitest";
 import NineLine from "../components/NineLine.tsx";
 import {userEvent} from "@testing-library/user-event";
+import * as service from '../service';
 
 describe('Nine Line Input Page', () => {
+
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
 
     it('should display the nine line app header with the input form', () => {
 
@@ -18,8 +23,9 @@ describe('Nine Line Input Page', () => {
 
     it('should display the submit button and allow user to fill in the input boxes and submit', async () => {
 
-        const mockSubmit = vi.fn(()=>0);
-        render(<NineLine onSubmit={mockSubmit}/>)
+        const mockSubmit = vi.spyOn
+        (service, 'submitNineLine').mockResolvedValue({success: true})
+        render(<NineLine/>)
 
         const line1 = screen.getByPlaceholderText(/line1/i);
         const line2 = screen.getByPlaceholderText(/line2/i);
@@ -40,11 +46,11 @@ describe('Nine Line Input Page', () => {
         await userEvent.click(screen.getByRole('button', {name: /submit/i}));
         expect(mockSubmit).toHaveBeenCalledTimes(1);
         expect(mockSubmit).toHaveBeenCalledWith({
-            Line1: 'Line1',
-            Line2: 'Line2',
-            Line3: 'Line3',
-            Line4: 'Line4',
-            Line5: 'Line5'
+            line1: 'Line1',
+            line2: 'Line2',
+            line3: 'Line3',
+            line4: 'Line4',
+            line5: 'Line5'
         });
     });
 });

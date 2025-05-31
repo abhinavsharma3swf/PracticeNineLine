@@ -1,18 +1,25 @@
 import {useState} from "react";
+import {submitNineLine} from "../service.ts";
 
 
-const NineLine = ({onSubmit}: any) => {
+const NineLine = () => {
 
     const [formData, setFormData] = useState({
-        Line1: '',
-        Line2: '',
-        Line3: '',
-        Line4: '',
-        Line5: ''
+        line1: '',
+        line2: '',
+        line3: '',
+        line4: '',
+        line5: ''
     })
-    function handleSubmit(e:any) {
+
+    const handleSubmit = async (e:any) => {
     e.preventDefault();
-    onSubmit(formData);
+    try{
+    // onSubmit(formData);
+    await submitNineLine(formData)
+    } catch (error){
+        console.log('Failed', error)
+    }
     }
 
     const handleChange = (e:any) =>{
@@ -29,26 +36,26 @@ const NineLine = ({onSubmit}: any) => {
                     <input
                     type='text'
                     placeholder='Line1'
-                    name='Line1'
+                    name='line1'
                     onChange={handleChange}/>
                     <input
                         type='text'
-                        name="Line2"
+                        name="line2"
                         placeholder='Line2'
                         onChange={handleChange}/>
                     <input
                         type='text'
-                        name="Line3"
+                        name="line3"
                         onChange={handleChange}
                         placeholder='Line3'/>
                     <input
                         type='text'
                         onChange={handleChange}
-                        name="Line4"
+                        name="line4"
                         placeholder='Line4'/>
                     <input
                     type='text'
-                    name="Line5"
+                    name="line5"
                     onChange={handleChange}
                     placeholder='Line5'/>
 

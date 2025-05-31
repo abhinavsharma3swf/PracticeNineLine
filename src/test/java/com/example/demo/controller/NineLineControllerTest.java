@@ -38,7 +38,7 @@ public class NineLineControllerTest {
     @Test
     void shouldAcceptRequestToCreateNineLineReq()  throws Exception{
         String nineLineReqJson = objectMapper.writeValueAsString(nineLineReq);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/nineLine")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/nineline")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(nineLineReqJson))
                 .andExpect(status().is2xxSuccessful());

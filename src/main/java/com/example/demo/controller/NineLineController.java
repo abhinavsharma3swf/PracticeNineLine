@@ -4,13 +4,10 @@ import com.example.demo.entity.NineLine;
 import com.example.demo.service.NineLineService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/nineLine")
+@RequestMapping("/api/nineline")
 public class NineLineController {
 
     private final NineLineService nineLineService;
@@ -19,7 +16,7 @@ public class NineLineController {
     public NineLineController(NineLineService nineLineService) {
         this.nineLineService = nineLineService;
     }
-
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping
     public ResponseEntity<NineLine> createNineLineReq(@RequestBody NineLine nineLine){
         return new ResponseEntity<>(nineLineService.createNewNineLineReq(nineLine), HttpStatus.CREATED);
