@@ -3,6 +3,8 @@ import {beforeEach, describe, expect, it, vi} from "vitest";
 import NineLine from "../components/NineLine.tsx";
 import {userEvent} from "@testing-library/user-event";
 import * as service from '../service';
+import {MemoryRouter, Route, Routes} from "react-router-dom";
+import {Dashboard} from "../components/Dashboard.tsx";
 
 describe('Nine Line Input Page', () => {
 
@@ -52,5 +54,20 @@ describe('Nine Line Input Page', () => {
             line4: 'Line4',
             line5: 'Line5'
         });
+    });
+
+    it('should display the exit button and route to the dashboard upon clicking', async () => {
+
+        render(
+            <MemoryRouter initialEntries={["/submit"]}>
+                <Routes>
+                    <Route path="/" element={<Dashboard/>}/>
+                    <Route path="/submit" element={<NineLine />} />
+                </Routes>
+            </MemoryRouter>
+        )
+        const exitButton= screen.getByRole('button', {name: 'Exit'});
+        await userEvent.click(exitButton);
+        expect(screen.getByRole('button', {name: /new nine line/i})).toBeVisible();
     });
 });

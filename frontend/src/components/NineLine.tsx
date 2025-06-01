@@ -1,8 +1,10 @@
 import {useState} from "react";
 import {submitNineLine} from "../service.ts";
+import {useNavigate} from "react-router-dom";
 
 
 const NineLine = () => {
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         line1: '',
@@ -60,6 +62,8 @@ const NineLine = () => {
                     placeholder='Line5'/>
 
                     <button type={"submit"}>Submit</button>
+                    <button type={'button'}
+                    onClick={()=> navigate('/')}>Exit</button>
 
                 </form>
             </div>
