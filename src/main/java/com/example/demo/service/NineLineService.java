@@ -23,7 +23,6 @@ public class NineLineService {
         return nineLineRepo.findAll();
     }
 
-
     public Optional<NineLine> softDeleteNineLine(Long id) {
             NineLine tempRequest = nineLineRepo.findById(id).orElseThrow();
             tempRequest.setSoftDelete(true);

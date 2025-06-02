@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -62,5 +63,15 @@ public class NineLineControllerTest {
         Mockito.when(nineLineService.fetchAllNineLineRequests()).thenReturn(request);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/nineline"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldAcceptRequestToSoftDeleteTheNineLineCard() throws Exception {
+        nineLineReq = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1");
+        nineLineReq.setId(1L);
+        nineLineReq.setSoftDelete(false);
+        Mockito.when(nineLineService.softDeleteNineLine(nineLineReq.getId())).thenReturn(Optional.of(nineLineReq));
+        mockMvc.perform(MockMvcRequestBuilders.patch("/api/nineline/1"))
+                .andExpect(status().is2xxSuccessful());
     }
 }

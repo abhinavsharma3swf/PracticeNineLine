@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -30,4 +31,8 @@ public class NineLineController {
         return new ResponseEntity<>(nineLineService.fetchAllNineLineRequests(),HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Optional<NineLine>> softDelete(@PathVariable Long id) {
+        return new ResponseEntity<>(nineLineService.softDeleteNineLine(id), HttpStatus.OK);
+    }
 }
