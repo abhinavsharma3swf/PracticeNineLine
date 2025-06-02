@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useState} from "react";
+import NineLineCard from "./NineLineCard.tsx";
 
 export const Dashboard=()=>{
 
@@ -10,8 +11,9 @@ export const Dashboard=()=>{
 
     async function fetchNineLine() {
         try{
-        const response = await axios.get('/api/nineline')
+        const response = await axios.get('http://localhost:8080/api/nineline')
         setData(response.data)
+
     } catch(error){
         console.log("Failed", error)
     }
@@ -25,17 +27,12 @@ export const Dashboard=()=>{
         <div>
             <button
             onClick={fetchNineLine}>Fetch All Nine Line</button>
-            <ul>
+
                 {data.map((item, index)=>(
-                    <div>
-                    <li key={index}>{item.line1}</li>
-                    <li key={index}>{item.line2}</li>
-                    <li key={index}>{item.line3}</li>
-                    <li key={index}>{item.line4}</li>
-                    <li key={index}>{item.line5}</li>
+                    <div key={index}>
+                        <NineLineCard nineLine={item}/>
                     </div>
                 ))}
-            </ul>
         </div>
         </>
     )
