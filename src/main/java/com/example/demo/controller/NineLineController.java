@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/nineline")
 public class NineLineController {
@@ -16,9 +19,15 @@ public class NineLineController {
     public NineLineController(NineLineService nineLineService) {
         this.nineLineService = nineLineService;
     }
-    @CrossOrigin(origins = "http://localhost:5173")
+
     @PostMapping
     public ResponseEntity<NineLine> createNineLineReq(@RequestBody NineLine nineLine){
         return new ResponseEntity<>(nineLineService.createNewNineLineReq(nineLine), HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<NineLine>> fetchAllNineLineRequests(){
+        return new ResponseEntity<>(nineLineService.fetchAllNineLineRequests(),HttpStatus.OK);
+    }
+
 }

@@ -12,6 +12,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,7 +28,7 @@ public class NineLineControllerTest {
     @MockitoBean
     private NineLineService nineLineService;
 
-    NineLine nineLineReq;
+    NineLine nineLineReq, nineLineReq1;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -48,5 +52,15 @@ public class NineLineControllerTest {
                 .andExpect(jsonPath("$.line3").value("No.ofPatientsByP"))
                 .andExpect(jsonPath("$.line4").value("SpecEqp"))
                 .andExpect(jsonPath("$.line5").value("PatByType"));
+    }
+
+    @Test
+    void shouldAcceptRequestTFetchAllNineLineRequests() throws Exception {
+        nineLineReq1 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1");
+        nineLineReq1.setId(2L);
+        List<NineLine> request = new ArrayList<>(List.of(nineLineReq, nineLineReq1));
+        Mockito.when(nineLineService.fetchAllNineLineRequests()).thenReturn(request);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/nineline"))
+                .andExpect(status().isOk());
     }
 }
