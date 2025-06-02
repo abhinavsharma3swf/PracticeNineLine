@@ -30,7 +30,7 @@ export const Dashboard=()=>{
 
                 {data.map((item, index)=>(
                     <div key={index}>
-                        <NineLineCard nineLine={item}/>
+                        {item.softDelete ? null : <NineLineCard nineLine={item}/>}
                     </div>
                 ))}
         </div>

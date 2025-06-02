@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import { render, screen} from "@testing-library/react";
 import {Dashboard} from "../components/Dashboard.tsx";
 import {MemoryRouter, Route, Routes} from 'react-router-dom';
 import NineLine from "../components/NineLine.tsx";
@@ -43,7 +43,10 @@ describe('Dashboard', () => {
 
         const mockData = [{
             line1: "line1",
-            line2: 'line2'
+            line2: 'line2',
+            line3: 'line3',
+            line4: 'line4',
+            line5: 'line5',
         }];
 
         (axios.get as any).mockResolvedValue({data: mockData});
@@ -55,6 +58,37 @@ describe('Dashboard', () => {
         const fetchButton = screen.getByRole('button', {name:/fetch all nine line/i});
         await userEvent.click(fetchButton)
         screen.debug();
-        expect( await screen.findByText('line1')).toBeInTheDocument();
+        expect( await screen.findByText('Nine Line Card')).toBeVisible();
+    });
+
+    it('should remove nineline card with soft delete set to true', async () => {
+        vi.mock('axios');
+
+        const mockData = [{
+            line1: "line1",
+            line2: 'line2',
+            line3: 'line3',
+            line4: 'line4',
+            line5: 'line5',
+            softDelete: true}];
+        // },{
+        //     line1: "line1",
+        //     line2: 'line2',
+        //     line3: 'line3',
+        //     line4: 'line4',
+        //     line5: 'line5',
+        //     softDelete: false
+        // }];
+
+        (axios.get as any).mockResolvedValue({data: mockData});
+        render(
+            <MemoryRouter>
+                <Dashboard/>
+            </MemoryRouter>
+        )
+        await userEvent.click(screen.getByRole('button',{name:"Fetch All Nine Line"}));
+        expect(screen.queryByText('Nine Line Card')).toBeNull();
+
+
     });
 });
