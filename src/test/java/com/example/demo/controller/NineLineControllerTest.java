@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(NineLineController.class)
@@ -41,6 +41,12 @@ public class NineLineControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/nineline")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(nineLineReqJson))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.line1").value("location"))
+                .andExpect(jsonPath("$.line2").value("radioFreq/Call-Sign"))
+                .andExpect(jsonPath("$.line3").value("No.ofPatientsByP"))
+                .andExpect(jsonPath("$.line4").value("SpecEqp"))
+                .andExpect(jsonPath("$.line5").value("PatByType"));
     }
 }

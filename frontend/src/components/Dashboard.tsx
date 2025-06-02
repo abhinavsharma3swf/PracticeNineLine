@@ -27,7 +27,13 @@ export const Dashboard=()=>{
             onClick={fetchNineLine}>Fetch All Nine Line</button>
             <ul>
                 {data.map((item, index)=>(
+                    <div>
                     <li key={index}>{item.line1}</li>
+                    <li key={index}>{item.line2}</li>
+                    <li key={index}>{item.line3}</li>
+                    <li key={index}>{item.line4}</li>
+                    <li key={index}>{item.line5}</li>
+                    </div>
                 ))}
             </ul>
         </div>

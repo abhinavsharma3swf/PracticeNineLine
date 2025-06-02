@@ -14,9 +14,13 @@ describe('Nine Line Input Page', () => {
 
     it('should display the nine line app header with the input form', () => {
 
-        render(<NineLine/>)
+        render(
+            <MemoryRouter>
+            <NineLine/>
+            </MemoryRouter>
+        )
         expect(screen.getByRole('heading')).toBeVisible();
-        expect(screen.getByPlaceholderText("Line1")).toBeVisible();
+        expect(screen.getByLabelText("Line1")).toBeVisible();
         expect(screen.getByPlaceholderText("Line2")).toBeVisible();
         expect(screen.getByPlaceholderText("Line3")).toBeVisible();
         expect(screen.getByPlaceholderText("Line4")).toBeVisible();
@@ -27,7 +31,11 @@ describe('Nine Line Input Page', () => {
 
         const mockSubmit = vi.spyOn
         (service, 'submitNineLine').mockResolvedValue({success: true})
-        render(<NineLine/>)
+        render(
+            <MemoryRouter>
+                <NineLine/>
+            </MemoryRouter>
+        )
 
         const line1 = screen.getByPlaceholderText(/line1/i);
         const line2 = screen.getByPlaceholderText(/line2/i);

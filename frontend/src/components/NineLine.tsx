@@ -39,6 +39,7 @@ const NineLine = () => {
                     type='text'
                     placeholder='Line1'
                     name='line1'
+                    aria-label={"Line1"}
                     onChange={handleChange}/>
                     <input
                         type='text'

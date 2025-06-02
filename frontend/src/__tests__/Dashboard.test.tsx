@@ -35,7 +35,7 @@ describe('Dashboard', () => {
         expect(button).toBeVisible();
         await userEvent.click(button);
         screen.debug();
-        expect(await screen.findByRole('heading')).toBeVisible();
+        expect(await screen.findByRole('heading', {name: /welcome to the nine line reporting system/i})).toBeVisible();
     });
 
     it('should fetch all nine line and display it on the screen', async () => {

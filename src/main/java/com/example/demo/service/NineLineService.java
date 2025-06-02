@@ -3,6 +3,8 @@ import com.example.demo.entity.NineLine;
 import com.example.demo.repository.NineLineRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NineLineService {
 
@@ -14,5 +16,8 @@ public class NineLineService {
 
     public NineLine createNewNineLineReq(NineLine nineLine){
         return nineLineRepo.save(nineLine);
+    }
+
+    public List<NineLine> fetchAllNineLineRequests() {return nineLineRepo.findAll();
     }
 }
