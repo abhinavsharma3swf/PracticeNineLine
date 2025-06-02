@@ -1,5 +1,5 @@
 import {beforeEach, expect, vi} from "vitest";
-import {submitNineLine} from "../service.ts";
+import {fetchNineLine, submitNineLine} from "../service.ts";
 import axios from "axios";
 
 
@@ -24,5 +24,11 @@ describe('submit nine line', () => {
         const result = await submitNineLine(mockNineLine);
         expect(axios.post).toHaveBeenLastCalledWith('/api/nineline', mockNineLine)
         expect(result).toEqual({success: true});
+    });
+
+    it('should fetch nine line', async () => {
+        (axios.get as any).mockResolvedValue({data: mockNineLine});
+        const result= await fetchNineLine();
+        expect(result).toEqual(mockNineLine);
     });
 });
