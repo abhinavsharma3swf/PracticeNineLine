@@ -2,11 +2,20 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import type {NineLineTypes} from "../NineLineTypes.ts";
+import {Button} from "@mui/material";
+import {softDelete} from "../service.ts";
 
 type NineLineProps = {
     nineLine : NineLineTypes,
 }
 export default function NineLineCard({nineLine}:NineLineProps) {
+    function handleDelete() {
+        // console.log(id);
+        // softDelete(id);
+
+        softDelete(nineLine.id);
+    }
+
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -24,6 +33,9 @@ export default function NineLineCard({nineLine}:NineLineProps) {
                     <br />
                 </Typography>
             </CardContent>
+            <Button onClick={handleDelete}>Delete</Button>
+            {/*<Button*/}
+            {/*onClick={()=> handleDelete(nineLine.id)}>Delete</Button>*/}
         </Card>
     );
 }

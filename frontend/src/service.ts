@@ -9,3 +9,8 @@ export const fetchNineLine = async ()=>{
     const response = await axios.get('http://localhost:8080/api/nineline');
     return response.data;
 }
+
+export const softDelete = async (id:any)=>{
+    const response = await axios.patch(`http://localhost:8080/api/nineline/${id}`);
+    return response.data;
+}
