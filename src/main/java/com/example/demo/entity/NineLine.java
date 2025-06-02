@@ -17,9 +17,18 @@ public class NineLine {
     private String line3;
     private String line4;
     private String line5;
+    private Boolean softDelete;
 
     public NineLine() {
 
+    }
+
+    public Boolean getSoftDelete() {
+        return softDelete;
+    }
+
+    public void setSoftDelete(Boolean softDelete) {
+        this.softDelete = softDelete;
     }
 
     public Long getId() {
@@ -76,5 +85,6 @@ public class NineLine {
         this.line3 = line3;
         this.line4 = line4;
         this.line5 = line5;
+        this.softDelete = false;
     }
 }
