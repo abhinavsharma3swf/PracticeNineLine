@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,9 +34,11 @@ public class NineLineServiceTest {
         nineLineReq2 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1");
         nineLineReq2.setId(2L);
         nineLineReq.setId(1L);
+        nineLineReq.setSoftDelete(false);
         requests = new ArrayList<>(List.of(nineLineReq,nineLineReq2));
 
         MockitoAnnotations.openMocks(this);  //Initializes @Mock and @InjectMocks
+
     }
 
     @Test
@@ -52,5 +55,15 @@ public class NineLineServiceTest {
         List<NineLine> requestList = nineLineService.fetchAllNineLineRequests();
         verify(nineLineRepo,times(1)).findAll();
         assertThat(requestList).isEqualTo(requests);
+    }
+
+    @Test
+    void shouldSoftDelete(){
+        when(nineLineRepo.existsById(1L)).thenReturn(true);
+        when(nineLineRepo.findById(1L)).thenReturn(Optional.of(nineLineReq));
+        when(nineLineRepo.save(any(NineLine.class))).thenReturn(nineLineReq);
+        Optional<NineLine> deletedItem = nineLineService.softDeleteNineLine(1L);
+        assertThat(deletedItem).isPresent();
+        assertThat(deletedItem.get().getSoftDelete()).isTrue();
     }
 }

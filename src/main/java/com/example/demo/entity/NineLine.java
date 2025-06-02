@@ -17,7 +17,7 @@ public class NineLine {
     private String line3;
     private String line4;
     private String line5;
-    private Boolean softDelete;
+    private Boolean softDelete = false;
 
     public NineLine() {
 
@@ -79,7 +79,7 @@ public class NineLine {
         this.line5 = line5;
     }
 
-    public NineLine(String line1, String line2, String line3, String line4, String line5) {
+    public NineLine( String line1, String line2, String line3, String line4, String line5) {
         this.line1 = line1;
         this.line2 = line2;
         this.line3 = line3;
