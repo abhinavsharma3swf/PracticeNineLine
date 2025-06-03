@@ -65,7 +65,6 @@ const NineLine = () => {
                     <button type={"submit"}>Submit</button>
                     <button type={'button'}
                     onClick={()=> navigate('/')}>Exit</button>
-
                 </form>
             </div>
         </div>

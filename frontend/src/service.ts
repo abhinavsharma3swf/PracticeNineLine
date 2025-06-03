@@ -14,3 +14,8 @@ export const softDelete = async (id:any)=>{
     const response = await axios.patch(`http://localhost:8080/api/nineline/${id}`);
     return response.data;
 }
+
+export const saveNineLine = async (id:any)=>{
+    const response = await axios.patch(`https://localhost:8080/api/nineline/edit/${id}`)
+    return response.data;
+}

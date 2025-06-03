@@ -88,7 +88,5 @@ describe('Dashboard', () => {
         )
         await userEvent.click(screen.getByRole('button',{name:"Fetch All Nine Line"}));
         expect(screen.queryByText('Nine Line Card')).toBeNull();
-
-
     });
 });
