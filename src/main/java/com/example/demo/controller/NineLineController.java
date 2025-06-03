@@ -35,4 +35,9 @@ public class NineLineController {
     public ResponseEntity<Optional<NineLine>> softDelete(@PathVariable Long id) {
         return new ResponseEntity<>(nineLineService.softDeleteNineLine(id), HttpStatus.OK);
     }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Optional<NineLine>> updateNineLine(@PathVariable Long id, @RequestBody NineLine updatedNineLine){
+        return new ResponseEntity<>(nineLineService.updateNineLine(updatedNineLine, id), HttpStatus.OK);
+    }
 }

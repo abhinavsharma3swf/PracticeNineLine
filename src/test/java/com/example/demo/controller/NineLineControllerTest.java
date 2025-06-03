@@ -29,7 +29,7 @@ public class NineLineControllerTest {
     @MockitoBean
     private NineLineService nineLineService;
 
-    NineLine nineLineReq, nineLineReq1;
+    NineLine nineLineReq, nineLineReq1, updatedNineLine;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -72,6 +72,16 @@ public class NineLineControllerTest {
         nineLineReq.setSoftDelete(false);
         Mockito.when(nineLineService.softDeleteNineLine(nineLineReq.getId())).thenReturn(Optional.of(nineLineReq));
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/nineline/1"))
+                .andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    void shouldAcceptRequestToUpdateTheUpdatedNineLineRequest() throws Exception {
+        updatedNineLine = new NineLine("Update1", "Update2", "Update3", "Update4", "Update5");
+        updatedNineLine.setId(1L);
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/nineline/edit/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedNineLine)))
                 .andExpect(status().is2xxSuccessful());
     }
 }
