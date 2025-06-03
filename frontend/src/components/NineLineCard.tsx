@@ -12,7 +12,6 @@ type NineLineProps = {
 export default function NineLineCard({nineLine}:NineLineProps) {
 
     const [edit, setEdit] = useState(false);
-    const [save, setSave] = useState(false);
     const [line1, setLine1] = useState(nineLine.line1);
     const [line2, setLine2] = useState(nineLine.line2);
     const [line3, setLine3] = useState(nineLine.line3);

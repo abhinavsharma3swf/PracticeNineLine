@@ -28,4 +28,12 @@ public class NineLineService {
             tempRequest.setSoftDelete(true);
             return Optional.of(nineLineRepo.save(tempRequest));
     }
+
+    public Optional<NineLine> updateNineLine(NineLine updateNineLine, Long id) {
+        if (nineLineRepo.existsById(id)) {
+//            NineLine tempNineLine = nineLineRepo.findById(id).orElseThrow();
+            return Optional.of(nineLineRepo.save(updateNineLine));
+        }
+        return Optional.empty();
+    }
 }
