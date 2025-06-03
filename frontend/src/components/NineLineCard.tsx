@@ -29,7 +29,18 @@ export default function NineLineCard({nineLine}:NineLineProps) {
     }
 
     function handleSave() {
-        saveNineLine(nineLine.id)
+
+        const uNineLine: NineLineTypes = {
+            id: nineLine.id,
+            line1,
+            line2,
+            line3,
+            line4,
+            line5,
+            softDelete: false
+        }
+
+        saveNineLine(uNineLine)
         setEdit(false);
     }
 

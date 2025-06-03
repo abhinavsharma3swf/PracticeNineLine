@@ -37,7 +37,7 @@ public class NineLineController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Optional<NineLine>> updateNineLine(@PathVariable Long id, @RequestBody NineLine updatedNineLine){
-        return new ResponseEntity<>(nineLineService.updateNineLine(updatedNineLine, id), HttpStatus.OK);
+    public ResponseEntity<Optional<NineLine>> updateNineLine(@RequestBody NineLine updatedNineLine){
+        return new ResponseEntity<>(nineLineService.updateNineLine(updatedNineLine), HttpStatus.OK);
     }
 }

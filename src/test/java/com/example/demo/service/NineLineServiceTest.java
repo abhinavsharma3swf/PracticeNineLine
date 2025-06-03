@@ -79,7 +79,7 @@ public class NineLineServiceTest {
         Mockito.when(nineLineRepo.save(any(NineLine.class))).thenReturn(updateNineLine);
 
         //Act-Calling the method under test
-        Optional<NineLine> result = nineLineService.updateNineLine(updateNineLine, 1L);
+        Optional<NineLine> result = nineLineService.updateNineLine(updateNineLine);
 
         //Assert-more detailed validation
         assertThat(result).isPresent();

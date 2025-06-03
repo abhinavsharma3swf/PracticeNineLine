@@ -29,11 +29,9 @@ public class NineLineService {
             return Optional.of(nineLineRepo.save(tempRequest));
     }
 
-    public Optional<NineLine> updateNineLine(NineLine updateNineLine, Long id) {
-        if (nineLineRepo.existsById(id)) {
+    public Optional<NineLine> updateNineLine(NineLine updateNineLine) {
+
 //            NineLine tempNineLine = nineLineRepo.findById(id).orElseThrow();
             return Optional.of(nineLineRepo.save(updateNineLine));
-        }
-        return Optional.empty();
     }
 }

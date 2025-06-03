@@ -1,4 +1,5 @@
 import axios from "axios";
+import type {NineLineTypes} from "./NineLineTypes.ts";
 
 export const submitNineLine = async (data: any)=>{
 const response = await axios.post('http://localhost:8080/api/nineline', data);
@@ -15,7 +16,8 @@ export const softDelete = async (id:any)=>{
     return response.data;
 }
 
-export const saveNineLine = async (id:any)=>{
-    const response = await axios.patch(`https://localhost:8080/api/nineline/edit/${id}`)
+export const saveNineLine = async (data:NineLineTypes)=>{
+    console.log("test")
+    const response = await axios.put(`http://localhost:8080/api/nineline/edit/${data.id}`,data)
     return response.data;
 }
