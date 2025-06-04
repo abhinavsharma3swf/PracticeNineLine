@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -18,6 +15,10 @@ public class NineLine {
     private String line3;
     private String line4;
     private String line5;
+
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private UserInfo userInfo;
 
     @JsonProperty  //This annotation sets the data into a json even when we don't have getters and setters
     private Boolean softDelete = false;
@@ -82,12 +83,13 @@ public class NineLine {
         this.line5 = line5;
     }
 
-    public NineLine( String line1, String line2, String line3, String line4, String line5) {
+    public NineLine(String line1, String line2, String line3, String line4, String line5, UserInfo userInfo) {
         this.line1 = line1;
         this.line2 = line2;
         this.line3 = line3;
         this.line4 = line4;
         this.line5 = line5;
+        this.userInfo = userInfo;
         this.softDelete = false;
     }
 }

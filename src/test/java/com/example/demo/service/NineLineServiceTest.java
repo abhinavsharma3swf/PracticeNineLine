@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.NineLine;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.NineLineRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,12 +26,16 @@ public class NineLineServiceTest {
     NineLine nineLineReq;
     NineLine nineLineReq2;
 
+    private UserInfo userinfo;
+
     List<NineLine> requests;
 
     @BeforeEach
     void setUp(){
-        nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType");
-        nineLineReq2 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1");
+
+        userinfo = new UserInfo("name", "callSign", "Unit", "role");
+        nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType", userinfo);
+        nineLineReq2 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1", userinfo);
         nineLineReq2.setId(2L);
         nineLineReq.setId(1L);
         nineLineReq.setSoftDelete(false);
@@ -68,7 +73,7 @@ public class NineLineServiceTest {
 
     @Test
     void shouldEditTheNineLine(){
-        NineLine updateNineLine = new NineLine("update1", "update2", "update3", "update4", "update5");
+        NineLine updateNineLine = new NineLine("update1", "update2", "update3", "update4", "update5", userinfo);
         updateNineLine.setId(1L);
 
         //Mocking repository behavior

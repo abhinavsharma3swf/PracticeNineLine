@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Entity
 public class UserInfo {
@@ -17,8 +17,9 @@ public class UserInfo {
     private String unit;
 
 
-    public UserInfo() {
+//    private List<NineLine> nineLineList;
 
+    public UserInfo() {
     }
 
     public Long getId() {

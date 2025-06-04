@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 import com.example.demo.entity.NineLine;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.service.NineLineService;
+import com.example.demo.service.UserInfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,15 +35,23 @@ public class NineLineControllerTest {
     private NineLineService nineLineService;
 
     NineLine nineLineReq, nineLineReq1, updatedNineLine;
+
+    private UserInfo userinfo;
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Captor
     ArgumentCaptor<NineLine> captor = ArgumentCaptor.forClass(NineLine.class);
 
+//  @Autowired
+//  private UserInfoService userInfoService;
+
     @BeforeEach
     void setUp(){
-        nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType");
+        userinfo = new UserInfo("name", "callSign", "unit", "role");
+        userinfo.setId(1L);
+        nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType", userinfo );
         nineLineReq.setId(1L);
         nineLineReq.setSoftDelete(false);
         Mockito.when(nineLineService.createNewNineLineReq(Mockito.any(NineLine.class))).thenReturn(nineLineReq);
@@ -68,7 +78,7 @@ public class NineLineControllerTest {
 
     @Test
     void shouldAcceptRequestTFetchAllNineLineRequests() throws Exception {
-        nineLineReq1 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1");
+        nineLineReq1 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1", userinfo);
         nineLineReq1.setId(2L);
         List<NineLine> request = new ArrayList<>(List.of(nineLineReq, nineLineReq1));
         Mockito.when(nineLineService.fetchAllNineLineRequests()).thenReturn(request);
@@ -78,7 +88,7 @@ public class NineLineControllerTest {
 
     @Test
     void shouldAcceptRequestToSoftDeleteTheNineLineCard() throws Exception {
-        nineLineReq = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1");
+        nineLineReq = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1", userinfo);
         nineLineReq.setId(1L);
         nineLineReq.setSoftDelete(false);
         Mockito.when(nineLineService.softDeleteNineLine(nineLineReq.getId())).thenReturn(Optional.of(nineLineReq));
@@ -95,7 +105,7 @@ public class NineLineControllerTest {
 
     @Test
     void shouldAcceptRequestToUpdateTheUpdatedNineLineRequest() throws Exception {
-        updatedNineLine = new NineLine("Update1", "Update2", "Update3", "Update4", "Update5");
+        updatedNineLine = new NineLine("Update1", "Update2", "Update3", "Update4", "Update5", userinfo);
         updatedNineLine.setId(1L);
         mockMvc.perform(MockMvcRequestBuilders.put("/api/nineline/edit/1")
                         .contentType(MediaType.APPLICATION_JSON)

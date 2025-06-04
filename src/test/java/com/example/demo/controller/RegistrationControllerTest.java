@@ -15,6 +15,9 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(RegistrationController.class)
@@ -48,6 +51,14 @@ public class RegistrationControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/registration")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(userInfoJson))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.name").value("name"))
+                .andExpect(jsonPath("$.callSign").value("call-sign"))
+                .andExpect(jsonPath("$.unit").value("unit"))
+                .andExpect(jsonPath("$.role").value("role"));
+
+        verify(userInfoService).createNewUser(captor.capture());
+        assertEquals("name", captor.getValue().getName());
     }
 }
