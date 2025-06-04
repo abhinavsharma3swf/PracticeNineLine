@@ -19,7 +19,7 @@ public class NineLine {
     private String line4;
     private String line5;
 
-    @JsonProperty
+    @JsonProperty  //This annotation sets the data into a json even when we don't have getters and setters
     private Boolean softDelete = false;
 
     public NineLine() {

@@ -1,6 +1,4 @@
 package com.example.demo.controller;
-
-
 import com.example.demo.entity.NineLine;
 import com.example.demo.service.NineLineService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,16 +13,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @WebMvcTest(NineLineController.class)
 public class NineLineControllerTest {
@@ -106,7 +103,6 @@ public class NineLineControllerTest {
                 .andExpect(status().is2xxSuccessful());
 
         verify(nineLineService).updateNineLine(captor.capture());
-
-
+        assertEquals("Update2", captor.getValue().getLine2());
     }
 }
