@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.entity.NineLine;
 import com.example.demo.service.NineLineService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.http.MediaType;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,10 +39,14 @@ public class NineLineControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Captor
+    ArgumentCaptor<NineLine> captor = ArgumentCaptor.forClass(NineLine.class);
+
     @BeforeEach
     void setUp(){
         nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType");
         nineLineReq.setId(1L);
+        nineLineReq.setSoftDelete(false);
         Mockito.when(nineLineService.createNewNineLineReq(Mockito.any(NineLine.class))).thenReturn(nineLineReq);
     }
 
@@ -52,7 +62,11 @@ public class NineLineControllerTest {
                 .andExpect(jsonPath("$.line2").value("radioFreq/Call-Sign"))
                 .andExpect(jsonPath("$.line3").value("No.ofPatientsByP"))
                 .andExpect(jsonPath("$.line4").value("SpecEqp"))
-                .andExpect(jsonPath("$.line5").value("PatByType"));
+                .andExpect(jsonPath("$.line5").value("PatByType"))
+                .andExpect(jsonPath("$.softDelete").value("false"));
+
+        verify(nineLineService).createNewNineLineReq(captor.capture());
+        assertEquals("location", captor.getValue().getLine1());
     }
 
     @Test
@@ -72,7 +86,14 @@ public class NineLineControllerTest {
         nineLineReq.setSoftDelete(false);
         Mockito.when(nineLineService.softDeleteNineLine(nineLineReq.getId())).thenReturn(Optional.of(nineLineReq));
         mockMvc.perform(MockMvcRequestBuilders.patch("/api/nineline/1"))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.softDelete").value(false))
+                        .andDo(print()); //print
+//
+//        We can not test this due to limitation with captor only testing the input mock data rather than the returned data.
+//        ArgumentCaptor <Long> idCaptor = ArgumentCaptor.forClass(Long.class);
+//        verify(nineLineService).softDeleteNineLine(idCaptor.capture());
+//        assertEquals(false, captor.getValue().getSoftDelete());
     }
 
     @Test
@@ -83,5 +104,9 @@ public class NineLineControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedNineLine)))
                 .andExpect(status().is2xxSuccessful());
+
+        verify(nineLineService).updateNineLine(captor.capture());
+
+
     }
 }

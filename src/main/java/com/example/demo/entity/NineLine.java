@@ -1,4 +1,5 @@
 package com.example.demo.entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class NineLine {
     private String line3;
     private String line4;
     private String line5;
+
+    @JsonProperty
     private Boolean softDelete = false;
 
     public NineLine() {

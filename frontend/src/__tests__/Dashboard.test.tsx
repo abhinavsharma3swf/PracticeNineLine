@@ -3,7 +3,7 @@ import {Dashboard} from "../components/Dashboard.tsx";
 import {MemoryRouter, Route, Routes} from 'react-router-dom';
 import NineLine from "../components/NineLine.tsx";
 import {userEvent} from "@testing-library/user-event";
-import {expect, vi} from "vitest";
+import {expect, it, vi} from "vitest";
 import axios from "axios";
 
 describe('Dashboard', () => {
@@ -88,5 +88,16 @@ describe('Dashboard', () => {
         )
         await userEvent.click(screen.getByRole('button',{name:"Fetch All Nine Line"}));
         expect(screen.queryByText('Nine Line Card')).toBeNull();
+    });
+
+
+    it('should display the background image when the app loads', () => {
+
+        render(
+            <MemoryRouter>
+                <Dashboard/>
+            </MemoryRouter>
+        )
+        expect(screen.getByLabelText('backgroundImage')).toBeVisible();
     });
 });

@@ -45,7 +45,7 @@ export default function NineLineCard({nineLine}:NineLineProps) {
     }
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ maxWidth: 450 }}>
             <CardContent>
                 <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 18 }}>
                     Nine Line Card
