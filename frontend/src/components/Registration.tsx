@@ -1,9 +1,12 @@
 import {Button, TextField} from "@mui/material";
 import {createRegistration} from "../service.ts";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 const Registration = () => {
+
+    const navigate = useNavigate();
 
     const[userInfo,setUserInfo] = useState({
         name:"",
@@ -21,6 +24,7 @@ const Registration = () => {
         } catch (error) {
             console.error("Failed", error)
         }
+        navigate('/')
     }
 
 const handleChange = (e: any) => {

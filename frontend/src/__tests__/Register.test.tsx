@@ -3,6 +3,7 @@ import {expect, vi} from "vitest";
 import Registration from "../components/Registration.tsx";
 import {userEvent} from "@testing-library/user-event";
 import * as service from "../service.ts";
+import {MemoryRouter} from "react-router-dom";
 
 describe('Register Page', () => {
 
@@ -19,7 +20,11 @@ describe('Register Page', () => {
 
     it('should display input field for the user and the submit', () => {
 
-        render(<Registration/>)
+        render(
+            <MemoryRouter>
+                <Registration/>
+            </MemoryRouter>
+        )
         screen.logTestingPlaygroundURL();
         const submit = screen.getByLabelText('button');
 
@@ -31,7 +36,11 @@ describe('Register Page', () => {
 
         const mockSubmit = vi.spyOn(service, "createRegistration").mockResolvedValue({success: true})
 
-        render(<Registration/>);
+        render(
+            <MemoryRouter>
+                <Registration/>
+            </MemoryRouter>
+        )
 
         const name = screen. getByRole('textbox', { name: /name/i });
         await userEvent.type(name, "John");

@@ -32,7 +32,7 @@ export const Dashboard=()=>{
                     onClick={() => navigate('/submit')}>New Nine Line
                 </button>
             </div>
-            <div>
+            <div>h
                 <button
                     onClick={fetchNineLine}>Fetch All Nine Line
                 </button>
@@ -42,6 +42,10 @@ export const Dashboard=()=>{
                         {item.softDelete ? null : <NineLineCard nineLine={item}/>}
                     </div>
                 ))}
+                <button
+                    onClick={()=> navigate('/registration')}>
+                    Registration
+                </button>
             </div>
         </div>
     )
