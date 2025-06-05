@@ -1,8 +1,9 @@
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import NineLineCard from "./NineLineCard.tsx";
 import ninelinepic from "../assets/ninelinepic.jpg"
+import {UserContext} from "../App.tsx";
 
 export const Dashboard=()=>{
 
@@ -10,11 +11,15 @@ export const Dashboard=()=>{
 
     const navigate = useNavigate();
 
+    const {job}= useContext(UserContext);
+
+    // const {userInfo} = useParams();
+    // console.log(userInfo);
+
     async function fetchNineLine() {
         try{
         const response = await axios.get('http://localhost:8080/api/nineline')
         setData(response.data)
-
     } catch(error){
         console.log("Failed", error)
     }
@@ -32,7 +37,7 @@ export const Dashboard=()=>{
                     onClick={() => navigate('/submit')}>New Nine Line
                 </button>
             </div>
-            <div>h
+            <div>
                 <button
                     onClick={fetchNineLine}>Fetch All Nine Line
                 </button>
@@ -47,8 +52,8 @@ export const Dashboard=()=>{
                     Registration
                 </button>
 
-                <h1> Dispatcher</h1>
-                <h1> Medic</h1>
+                {!(job === "Medic") ? <h1> Dispatcher</h1>: <h1>You are not a Medic GO HOME</h1>}
+                {(job === "Medic") ? <h1> Medic</h1> : <h1> Welcome to save someone's life </h1>}
             </div>
         </div>
     )

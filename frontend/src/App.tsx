@@ -10,11 +10,12 @@ export const UserContext = createContext();
 function App() {
 
     const [userId, setUserId] = useState(null);
+    const [job, setJob] = useState(null);
 
   return (
     <>
         <BrowserRouter>
-            <UserContext.Provider value={{userId, setUserId}}>
+            <UserContext.Provider value={{userId, setUserId, job, setJob}}>
             <Routes>
                 <Route path={"/registration"} element={<Registration/>}/>
                 <Route path={"/"} element={<Dashboard/>}/>

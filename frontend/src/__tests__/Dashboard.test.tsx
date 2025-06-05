@@ -5,6 +5,7 @@ import NineLine from "../components/NineLine.tsx";
 import {userEvent} from "@testing-library/user-event";
 import {expect, it, vi} from "vitest";
 import axios from "axios";
+import {UserContext} from "../App.tsx";
 
 describe('Dashboard', () => {
 
@@ -93,13 +94,18 @@ describe('Dashboard', () => {
 
     it('should display the heading based on the role', () => {
 
+        const mockContext = {
+            job: 'Medic',
+            userId: 1
+        }
         render(
+            <UserContext.Provider value={mockContext}>
             <MemoryRouter>
                 <Dashboard/>
             </MemoryRouter>
+            </UserContext.Provider>
         )
-        expect(screen.getByRole('heading', {name:'Dispatcher'})).toBeVisible();
         expect(screen.getByRole('heading', {name:'Medic'})).toBeVisible();
-
+        expect(screen.queryByText("Dispatcher")).toBeNull();
     });
 });

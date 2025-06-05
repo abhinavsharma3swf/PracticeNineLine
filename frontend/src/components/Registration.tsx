@@ -22,12 +22,16 @@ const Registration = () => {
 
 
     const {userId, setUserId} = useContext(UserContext);
+    const {job, setJob} = useContext(UserContext);
+
+
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             const userI = await createRegistration(userInfo)
             setUserId(userI.id)
+            setJob(userInfo.role)
         } catch (error) {
             console.error("Failed", error)
         }
