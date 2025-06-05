@@ -54,7 +54,7 @@ public class NineLineControllerTest {
         nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType", userinfo );
         nineLineReq.setId(1L);
         nineLineReq.setSoftDelete(false);
-        Mockito.when(nineLineService.createNewNineLineReq(Mockito.any(NineLine.class))).thenReturn(nineLineReq);
+        Mockito.when(nineLineService.createNewNineLineReq(Mockito.any(Long.class), Mockito.any(NineLine.class))).thenReturn(nineLineReq);
     }
 
     @Test
@@ -70,9 +70,11 @@ public class NineLineControllerTest {
                 .andExpect(jsonPath("$.line3").value("No.ofPatientsByP"))
                 .andExpect(jsonPath("$.line4").value("SpecEqp"))
                 .andExpect(jsonPath("$.line5").value("PatByType"))
-                .andExpect(jsonPath("$.softDelete").value("false"));
+                .andExpect(jsonPath("$.softDelete").value("false"))
+                .andExpect(jsonPath("$.userInfo.id").value(1L));
 
-        verify(nineLineService).createNewNineLineReq(captor.capture());
+        ArgumentCaptor<Long> id = ArgumentCaptor.forClass(Long.class);
+        verify(nineLineService).createNewNineLineReq(id.capture(), captor.capture());
         assertEquals("location", captor.getValue().getLine1());
     }
 

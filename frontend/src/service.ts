@@ -3,7 +3,10 @@ import type {NineLineTypes} from "./NineLineTypes.ts";
 import type {UserTypes} from "./UserTypes.ts";
 
 export const submitNineLine = async (data: any)=>{
-const response = await axios.post('http://localhost:8080/api/nineline', data);
+    console.log(data)
+
+const response = await axios.post('http://localhost:8080/api/nineline',data);
+    console.log(data)
 return response.data;
 }
 

@@ -1,6 +1,8 @@
 package com.example.demo.service;
 import com.example.demo.entity.NineLine;
+import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.NineLineRepo;
+import com.example.demo.repository.UserInfoRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,12 +12,17 @@ import java.util.Optional;
 public class NineLineService {
 
     private final NineLineRepo nineLineRepo;
+    private final UserInfoRepo userInfoRepo;
 
-    public NineLineService(NineLineRepo nineLineRepo) {
+    public NineLineService(NineLineRepo nineLineRepo, UserInfoRepo userInfoRepo) {
         this.nineLineRepo = nineLineRepo;
+        this.userInfoRepo = userInfoRepo;
     }
 
-    public NineLine createNewNineLineReq(NineLine nineLine){
+    public NineLine createNewNineLineReq(Long id, NineLine nineLine){
+        UserInfo userInfo = userInfoRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("user not found"));
+        nineLine.setUserInfo(userInfo);
         return nineLineRepo.save(nineLine);
     }
 

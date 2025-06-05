@@ -1,12 +1,17 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {submitNineLine} from "../service.ts";
 import {useNavigate} from "react-router-dom";
+import {UserContext} from "../App.tsx";
 
 
 const NineLine = () => {
 
+    const {userId} = useContext(UserContext);
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        userInfo: {id: userId
+        },
         line1: '',
         line2: '',
         line3: '',

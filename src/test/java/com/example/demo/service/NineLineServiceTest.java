@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.NineLine;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.repository.NineLineRepo;
+import com.example.demo.repository.UserInfoRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,7 +21,8 @@ public class NineLineServiceTest {
 
     @Mock
     NineLineRepo nineLineRepo;
-
+    @Mock
+    UserInfoRepo userInfoRepo;
     @InjectMocks
     NineLineService nineLineService;
     NineLine nineLineReq;
@@ -28,12 +30,15 @@ public class NineLineServiceTest {
 
     private UserInfo userinfo;
 
+
+
     List<NineLine> requests;
 
     @BeforeEach
     void setUp(){
 
         userinfo = new UserInfo("name", "callSign", "Unit", "role");
+        userinfo.setId(1L);
         nineLineReq = new NineLine("location", "radioFreq/Call-Sign", "No.ofPatientsByP", "SpecEqp", "PatByType", userinfo);
         nineLineReq2 = new NineLine("location1", "radioFreq/Call-Sign1", "No.ofPatientsByP1", "SpecEqp1", "PatByType1", userinfo);
         nineLineReq2.setId(2L);
@@ -47,8 +52,10 @@ public class NineLineServiceTest {
 
     @Test
     void shouldCreateANewNineLineRequest(){
+        when(userInfoRepo.save(userinfo)).thenReturn(userinfo);
+        when(userInfoRepo.findById(1L)).thenReturn(Optional.of(userinfo));
         when(nineLineRepo.save(nineLineReq)).thenReturn(nineLineReq);
-        NineLine actualReq = nineLineService.createNewNineLineReq(nineLineReq);
+        NineLine actualReq = nineLineService.createNewNineLineReq(1L, nineLineReq);
         verify(nineLineRepo,times(1)).save((any(NineLine.class)));
         assertThat(actualReq).isEqualTo(nineLineReq);
     }

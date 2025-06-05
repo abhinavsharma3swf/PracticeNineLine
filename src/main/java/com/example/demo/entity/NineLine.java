@@ -20,6 +20,14 @@ public class NineLine {
     @JoinColumn(name = "userid")
     private UserInfo userInfo;
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
     @JsonProperty  //This annotation sets the data into a json even when we don't have getters and setters
     private Boolean softDelete = false;
 

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.NineLine;
 import com.example.demo.service.NineLineService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,8 @@ public class NineLineController {
 
     @PostMapping
     public ResponseEntity<NineLine> createNineLineReq(@RequestBody NineLine nineLine){
-        return new ResponseEntity<>(nineLineService.createNewNineLineReq(nineLine), HttpStatus.CREATED);
+        Long userId = nineLine.getUserInfo().getId();
+        return new ResponseEntity<>(nineLineService.createNewNineLineReq(userId, nineLine), HttpStatus.CREATED);
     }
 
     @GetMapping
