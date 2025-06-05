@@ -91,13 +91,15 @@ describe('Dashboard', () => {
     });
 
 
-    it('should display the background image when the app loads', () => {
+    it('should display the heading based on the role', () => {
 
         render(
             <MemoryRouter>
                 <Dashboard/>
             </MemoryRouter>
         )
-        expect(screen.getByLabelText('backgroundImage')).toBeVisible();
+        expect(screen.getByRole('heading', {name:'Dispatcher'})).toBeVisible();
+        expect(screen.getByRole('heading', {name:'Medic'})).toBeVisible();
+
     });
 });

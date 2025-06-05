@@ -46,6 +46,9 @@ export const Dashboard=()=>{
                     onClick={()=> navigate('/registration')}>
                     Registration
                 </button>
+
+                <h1> Dispatcher</h1>
+                <h1> Medic</h1>
             </div>
         </div>
     )

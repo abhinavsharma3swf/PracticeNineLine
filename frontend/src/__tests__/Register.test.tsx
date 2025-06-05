@@ -1,9 +1,10 @@
-import {render, screen} from "@testing-library/react";
+import {getByRole, render, screen} from "@testing-library/react";
 import {expect, vi} from "vitest";
 import Registration from "../components/Registration.tsx";
 import {userEvent} from "@testing-library/user-event";
 import * as service from "../service.ts";
 import {MemoryRouter} from "react-router-dom";
+import { UserContext } from "../App.tsx";
 
 describe('Register Page', () => {
 
@@ -64,6 +65,31 @@ describe('Register Page', () => {
             unit: "futures",
             role: "dispatcher"
         })
+    });
+
+    it('should display the user name', async () => {
+
+        const fakeUser = {
+            name: "Chris",
+            callSign: "6969",
+            unit: "asf",
+            role: "medic"
+        }
+
+        const mockSubmit = vi.spyOn(service, 'createRegistration').mockResolvedValue(fakeUser);
+
+        render(
+            <MemoryRouter>
+                <UserContext.Provider value={{fakeUser}}>
+                    <Registration/>
+                </UserContext.Provider>
+            </MemoryRouter>
+        )
+
+        const button = screen.getByRole('button',{name: 'submit'});
+        await userEvent.click(button);
+        expect(mockSubmit).toHaveBeenCalledTimes(1);
+        expect(mockSubmit).toHaveBeenCalledWith(fakeUser);
     });
 
 });

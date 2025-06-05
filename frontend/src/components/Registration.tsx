@@ -4,7 +4,8 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 
-const Registration = () => {
+
+const Registration = ({setUserId}:any) => {
 
     const navigate = useNavigate();
 
@@ -20,7 +21,8 @@ const Registration = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            await createRegistration(userInfo)
+            const userId = await createRegistration(userInfo)
+            setUserId(userId.id)
         } catch (error) {
             console.error("Failed", error)
         }
