@@ -1,11 +1,12 @@
 import {Button, TextField} from "@mui/material";
 import {createRegistration} from "../service.ts";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {UserContext} from "../App.tsx";
 
 
 
-const Registration = ({setUserId}:any) => {
+const Registration = () => {
 
     const navigate = useNavigate();
 
@@ -18,11 +19,15 @@ const Registration = ({setUserId}:any) => {
 
     const {name,callSign,unit,role} = userInfo;  //Deconstruction of the userinfo
 
+
+
+    const {userId, setUserId} = useContext(UserContext);
+
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            const userId = await createRegistration(userInfo)
-            setUserId(userId.id)
+            const userI = await createRegistration(userInfo)
+            setUserId(userI.id)
         } catch (error) {
             console.error("Failed", error)
         }

@@ -4,8 +4,8 @@ import {useNavigate} from "react-router-dom";
 
 
 const NineLine = () => {
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         line1: '',
         line2: '',

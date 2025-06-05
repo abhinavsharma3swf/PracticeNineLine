@@ -14,9 +14,9 @@ function App() {
   return (
     <>
         <BrowserRouter>
-            <UserContext.Provider value={userId}>
+            <UserContext.Provider value={{userId, setUserId}}>
             <Routes>
-                <Route path={"/registration"} element={<Registration setUser={setUserId}/>}/>
+                <Route path={"/registration"} element={<Registration/>}/>
                 <Route path={"/"} element={<Dashboard/>}/>
                 <Route path={"/submit"} element={<NineLine/>}/>
             </Routes>
