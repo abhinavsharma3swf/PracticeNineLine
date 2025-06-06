@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useContext, useState} from "react";
 import NineLineCard from "./NineLineCard.tsx";
@@ -25,19 +25,23 @@ export const Dashboard=()=>{
     }
     }
     return(
+        <>
+        <div className="dashboard">
+
         <div style={{
             backgroundImage: `url(${ninelinepic})`,
             backgroundSize: 'cover', // or 'contain', 'auto', etc.
             backgroundRepeat: 'no-repeat',
-            height: '100vh', // Adjust as needed
-            width: '100vw', // Adjust as needed
+            height: '5vh', // Adjust as needed
+            width: '5vw', // Adjust as needed
         }}>
-            <div>
+        </div>
+            <div className="button">
                 <button
                     onClick={() => navigate('/submit')}>New Nine Line
                 </button>
             </div>
-            <div>
+            <div className="button">
                 <button
                     onClick={fetchNineLine}>Fetch All Nine Line
                 </button>
@@ -47,14 +51,17 @@ export const Dashboard=()=>{
                         {item.softDelete ? null : <NineLineCard nineLine={item}/>}
                     </div>
                 ))}
+                <div className="button">
                 <button
                     onClick={()=> navigate('/registration')}>
                     Registration
                 </button>
+                </div>
 
-                {!(job === "Medic") ? <h1> Dispatcher</h1>: <h1>You are not a Medic GO HOME</h1>}
-                {(job === "Medic") ? <h1> Medic</h1> : <h1> Welcome to save someone's life </h1>}
+                {(job === "Dispatcher") ? <h1> Dispatcher</h1>: <h1>You are not a dispatcher GO HOME</h1>}
+                {(job === "Medic") ? <h1> Medic</h1> : <h1> You are not a medic </h1>}
             </div>
         </div>
+        </>
     )
 }
