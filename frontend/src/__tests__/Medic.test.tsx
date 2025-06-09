@@ -3,9 +3,7 @@ import {MemoryRouter, Route, Routes} from "react-router-dom";
 import {userEvent} from "@testing-library/user-event";
 import {UserContext} from "../App.tsx";
 import Medic from "../components/Medic.tsx";
-import Registration from "../components/Registration.tsx";
 import NineLine from "../components/NineLine.tsx";
-import { Dashboard } from "../components/Dashboard.tsx";
 
 describe('Medic Component', () => {
 

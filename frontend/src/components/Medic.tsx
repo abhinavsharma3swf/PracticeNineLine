@@ -5,9 +5,19 @@ import Typography from "@mui/material/Typography";
 import {Button} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import {useNavigate} from "react-router-dom";
+import MedicAccordion from "./MedicAccordion.tsx";
+import {useState} from "react";
 
 
 const Medic = () => {
+
+    const [nine1, setNine1] = useState({
+        line1: "",
+        line2: "" ,
+        line3: "",
+        line4: "",
+        line5: ""
+    })
 
     const navigate = useNavigate();
     function handleNavigateNewLine() {
@@ -45,6 +55,7 @@ const Medic = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
+            <MedicAccordion nineLine={nine1}/>
         </div>
     );
 };

@@ -6,6 +6,7 @@ import NineLine from "./components/NineLine.tsx";
 import Registration from "./components/Registration.tsx";
 import {createContext, useState} from "react";
 import Medic from "./components/Medic.tsx";
+import MedicAccordion from "./components/MedicAccordion.tsx";
 
 export const UserContext = createContext();
 function App() {
@@ -21,7 +22,15 @@ function App() {
                 <Route path={"/"} element={<Registration/>}/>
                 {/*<Route path={"/"} element={<Dashboard/>}/>*/}
                 <Route path={"/submit"} element={<NineLine/>}/>
-                <Route path={"/medic"} element={<Medic/>}/>
+                <Route path={"/medic"} element={<MedicAccordion nineLine={{
+                          id: undefined,
+                          line1: '',
+                          line2: '',
+                          line3: '',
+                          line4: '',
+                          line5: '',
+                          softDelete: undefined
+                      }}/>}/>
             </Routes>
             </UserContext.Provider>
         </BrowserRouter>
