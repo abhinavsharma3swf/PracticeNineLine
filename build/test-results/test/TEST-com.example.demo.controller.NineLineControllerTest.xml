@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.demo.controller.NineLineControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-05T18:52:08.795Z" hostname="RGCASWFA0309" time="0.082">
+  <properties/>
+  <testcase name="shouldAcceptRequestToCreateNineLineReq()" classname="com.example.demo.controller.NineLineControllerTest" time="0.082"/>
+  <system-out><![CDATA[13:52:07.921 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.demo.controller.NineLineControllerTest]: NineLineControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:52:07.972 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.demo.DemoApplication for test class com.example.demo.controller.NineLineControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.0)
+
+2025-06-05T13:52:08.407-05:00  INFO 5554 --- [PracticeNineLine] [    Test worker] c.e.d.controller.NineLineControllerTest  : Starting NineLineControllerTest using Java 17.0.13 with PID 5554 (started by a2439284 in /Users/a2439284/PracticeNineLine)
+2025-06-05T13:52:08.407-05:00  INFO 5554 --- [PracticeNineLine] [    Test worker] c.e.d.controller.NineLineControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2025-06-05T13:52:08.777-05:00  INFO 5554 --- [PracticeNineLine] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-06-05T13:52:08.777-05:00  INFO 5554 --- [PracticeNineLine] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-06-05T13:52:08.778-05:00  INFO 5554 --- [PracticeNineLine] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2025-06-05T13:52:08.792-05:00  INFO 5554 --- [PracticeNineLine] [    Test worker] c.e.d.controller.NineLineControllerTest  : Started NineLineControllerTest in 0.513 seconds (process running for 1.197)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
